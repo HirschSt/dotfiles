@@ -1,0 +1,42 @@
+Config { font            = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
+                           , "xft:Font Awesome 6 Free Solid:pixelsize=12"
+                           , "xft:Font Awesome 6 Brands:pixelsize=12"
+                           ]
+       -- font = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
+       , bgColor = "#292b2c"
+       , fgColor = "grey"
+       , lowerOnStart = False
+       , position = TopW L 100
+       --, position = BottomW L 100
+			 --, border =       BottomB
+   		 --, borderColor =  "#646464"
+
+       , commands = [ Run DynNetwork     [ "--template" , "<rx> kB/s"
+                             , "--Low"      , "1000"       -- units: B/s
+                             , "--High"     , "5000"       -- units: B/s
+                             , "--low"      , "#5cb85c"
+                             , "--normal"   , "orange"
+                             , "--high"     , "orange"
+                             ] 10
+
+
+                    -- , Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","15","-H","50","--normal","#5cb85c","--high","#f0ad4e"] 10
+                    --, Run Memory ["-t","Mem: %"] 10
+										, Run Memory         [ "--template" ,"Mem: <usedratio>%"
+                             , "--Low"      , "20"        -- units: %
+                             , "--High"     , "90"        -- units: %
+                             , "--low"      , "darkgreen"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkred"
+                              ] 10
+										, Run Weather "EDDF" [ "--template", "<station>: <skyCondition> <tempC>°C |", "-L","10","-H","25","--normal","#5cb85c","--high","red","--low","lightblue"] 36000
+                    , Run Swap [] 10
+                    , Run Date "<fc=#FF9933>%a %b %_d %Y %H:%M:%S</fc>" "date" 10
+                    , Run UnsafeStdinReader
+                     ]
+       , sepChar = "%"
+			 , alignSep = "}{"
+			 , template = "%UnsafeStdinReader% }{ %EDDF% %cpu% | %memory% * %swap% | %dynnetwork% | %date%  "
+       }

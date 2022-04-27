@@ -1,0 +1,6 @@
+xrdb $HOME/.Xresources &
+xscreensaver -no-splash &
+urxvtd -q -o -f &
+/usr/local/bin/picom --config /home/stephan/.config/picom.conf -b
+/usr/bin/ruby /home/stephan/bg_setter.rb /home/stephan/Bilder/bg/wallpapers
+#exec ck-launch-session dbus-launch bash -c "xmonad"
