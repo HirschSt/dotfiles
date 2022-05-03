@@ -83,7 +83,7 @@ xmobarEscape = concatMap doubleLts
   where doubleLts '<' = "<<"
         doubleLts x    = [x]
 myWorkspaces :: [String]
-myWorkspaces = clickable . (map xmobarEscape) $ ["Terminal ","Browser","Banking","Filemanager","Scan","Graphic","Monitoring","Audio/Video","RISM"]
+myWorkspaces = clickable . (map xmobarEscape) $ ["Terminal ","Browser","Banking","Mail","Scan","Utils","Monitoring","Audio/Video","RISM"]
   where
     clickable l = [ "<action=xdotool key alt+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
       (i,ws) <- zip [1..9] l,                                        
@@ -106,6 +106,7 @@ myKeys =
     , ((mod1Mask .|. shiftMask, xK_t), namedScratchpadAction scratchpads "term")
     , ((mod1Mask .|. shiftMask, xK_p), namedScratchpadAction scratchpads "pavucontrol")
     , ((mod1Mask .|. shiftMask, xK_m), namedScratchpadAction scratchpads "scrcpy")
+    , ((mod1Mask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "nemo")
     , ((mod1Mask .|. shiftMask, xK_d), namedScratchpadAction scratchpads "calc")
   ]
   ++
@@ -130,6 +131,7 @@ myKeys =
 myManageHook =  composeAll
   [ className =? "MPlayer"        --> doFloat
   , className =? "Gnome-calculator"           --> doFloat
+  , className =? "Evince"           --> doFloat
   ]
 
 -------------------------------------
@@ -146,6 +148,9 @@ scratchpads = [
         (customFloating $ W.RationalRect (1/4) (1/4) (2/4) (2/4)),
 
     NS "scrcpy" "scrcpy" (className =? "scrcpy") defaultFloating,
+    
+    NS "nemo" "nemo" (className =? "Nemo") 
+        (customFloating $ W.RationalRect  (2/6) (2/6) (2/6) (3/6)),
 
     NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol")
         (customFloating $ W.RationalRect  (1/6) (1/6) (2/3) (2/3))

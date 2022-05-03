@@ -1,0 +1,90 @@
+### ACCOUNT SETTINGS
+set from = "user@example.com"
+set realname = "Username"
+set signature = "~/.mutt/signature"
+set status_format = "  MAILBOX"
+# Imap settings
+set imap_user = "user@example.com"
+set imap_pass = "xxx"
+# Smtp settings
+set smtp_url = "smtps://user@example.com@smtp.gmail.com:465/"
+set smtp_pass = "xxx"
+set smtp_authenticators="login" 
+set ssl_starttls = no
+set ssl_force_tls = yes
+set ssl_verify_host = no
+set ssl_verify_dates = no
+# Caching
+set header_cache=~/.mutt/cache/example
+set message_cachedir=~/.mutt/cache/example
+
+### GENERAL SETTINGS
+
+# Folders and Mailboxes
+set folder = "imaps://imap.gmail.com/"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Entwürfe"
+set record = "+[Gmail]/Sent Mail"
+set trash = "+[Gmail]/Papierkorb"
+mailboxes imaps://imap.gmail.com/INBOX +[Gmail]/Markiert +[Gmail]/Gesendet
+
+# Global settings
+set abort_nosubject = no
+set mail_check = 60
+set timeout = 10
+set copy = no
+#set edit_headers=yes
+
+# View
+set mailcap_path=/home/user/.mutt/mailcap
+auto_view text/html
+set implicit_autoview=yes
+
+# Sorting
+#set sort = "reverse-date-received"
+set sort = threads 
+set sort_aux = reverse-last-date-received
+
+# Keybinding
+bind index G imap-fetch-mail
+#bind index,pager \Cj sidebar-next
+#bind index,pager \Cl sidebar-open
+#bind index,pager \Ck sidebar-prev
+macro index,pager A "<save-message>=Archive<enter>" "Archive Message"
+#set sidebar_visible
+#set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+ )+"
+alternative_order text/html text/enriched text/plain
+
+# Colors
+color normal white default
+color attachment yellow default
+color header brightyellow default "From: "
+color header brightyellow default "Subject: "
+color header brightyellow default "Date: "
+color quoted green default
+color quoted1 cyan default
+color quoted2 green default
+color quoted3 cyan default
+color error     red             default
+color message   white           default
+color indicator white           brightblack
+color status    white           blue
+color tree      red             default
+color search    white           blue
+color markers   red             default
+color index     yellow default  '~O'
+color index     yellow default  '~N'
+color index     blue       default '~F'
+color index     blue default    '~D'
+
+# Aliases
+alias other Other Name <other@example.com>

@@ -1,0 +1,2 @@
+text/html;elinks -default-mime-type text/html -dump -dump-charset UTF-8 %s;copiousoutput
+application/pdf; /usr/bin/evince %s; 
